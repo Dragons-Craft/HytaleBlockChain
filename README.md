@@ -2,7 +2,7 @@
 by [chrisbarnes2000](https://github.com/chrisbarnes2000) & [reikamoon :ribbon:](https://github.com/reikamoon)
 
 ## :video_game: What is Hytale?
-<b>Hytale</b> is an upcoming sandbox game by Hypixel Studios. Hytale aims to immerse players in a procedurally generated world which boasts of teetering towers and deep dungeons which promise rich rewards.
+<b>Hytale</b> is an upcoming sandbox game by Hypixel Studios. Hytale aims to immerse players in a procedurally generated world which boasts of teetering towers and deep dungeons which promise rich rewards.<br>
 [Read More...](https://hytale.com/)
 
 ## :memo: Project Description
