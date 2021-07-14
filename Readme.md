@@ -24,6 +24,7 @@ We would like to take the photos from https://hytale.com/media or their Twitter 
 <li>https://medium.com/ethereum-developers/the-ultimate-end-to-end-tutorial-to-create-and-deploy-a-fully-descentralized-dapp-in-ethereum-18f0cf6d7e0e</li>
 ---
 <li>https://docs.ipfs.io/how-to/work-with-pinning-services/#use-an-existing-pinning-service</li>
+<li>https://docs.ipfs.io/how-to/pin-files/#three-kinds-of-pins</li>
 <li>https://pinata.cloud/documentation#PinningServicesAPI</li>
 ---
 <li>https://docs.ipfs.io/how-to/command-line-quick-start</li>
