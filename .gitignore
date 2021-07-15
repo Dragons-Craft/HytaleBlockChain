@@ -38,6 +38,8 @@ npm-debug.log
 .env.production.local
 
 # truffle build directory & production
+
+# truffle build directory
 build/
 
 # macOS
@@ -212,3 +214,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.vscode/
+.env
+.mnemonic
