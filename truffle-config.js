@@ -22,10 +22,34 @@ require('dotenv').config()
 require('babel-register');
 require('babel-polyfill');
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const DefaultBuilder = require("truffle-default-builder");
-const infuraKey = process.env.INFURA_KEY;
-const mnemonic = process.env.MNEMONIC;
+const HDWalletProvider = require("truffle-hdwallet-provider");
+
+const MNEMONIC = process.env.MNEMONIC;
+const NODE_API_KEY = process.env.INFURA_KEY || process.env.ALCHEMY_KEY;
+const isInfura = !!process.env.INFURA_KEY;
+
+// const HDWalletProvider = require('@truffle/hdwallet-provider');
+// const DefaultBuilder = require("truffle-default-builder");
+// const infuraKey = process.env.INFURA_KEY;
+// const mnemonic = process.env.MNEMONIC;
+
+const needsNodeAPI =
+  process.env.npm_config_argv &&
+  (process.env.npm_config_argv.includes("rinkeby") ||
+    process.env.npm_config_argv.includes("live"));
+
+if ((!MNEMONIC || !NODE_API_KEY) && needsNodeAPI) {
+  console.error("Please set a mnemonic and ALCHEMY_KEY or INFURA_KEY.");
+  process.exit(0);
+}
+
+const rinkebyNodeUrl = isInfura
+  ? "https://rinkeby.infura.io/v3/" + NODE_API_KEY
+  : "https://eth-rinkeby.alchemyapi.io/v2/" + NODE_API_KEY;
+
+const mainnetNodeUrl = isInfura
+  ? "https://mainnet.infura.io/v3/" + NODE_API_KEY
+  : "https://eth-mainnet.alchemyapi.io/v2/" + NODE_API_KEY;
 
 module.exports = {
   /**
@@ -37,32 +61,44 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-
-  networks: {
+   networks: {
     development: {
       host: "127.0.0.1",     // Localhost (default: none)
-      port: 8545,            // Standard Ethereum port (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      gas: 5000000,
       network_id: "*",       // Any network (default: none)
     },
     rinkeby: {
-      provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
+      // provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
+      provider: () => new HDWalletProvider(MNEMONIC, rinkebyNodeUrl),
       network_id: 4,       // rinkeby's id
-      gas: 5500000,        // Ropsten has a lower block limit than mainnet
+      gas: 5000000,        // Ropsten has a lower block limit than mainnet
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-    }
+    },
+    live: {
+      network_id: 1,
+      provider: function () {
+        return new HDWalletProvider(MNEMONIC, mainnetNodeUrl);
+      },
+      gas: 5000000,
+      gasPrice: 5000000000,
+    },
   },
-
-  build: new DefaultBuilder({
-    "index.html": "index.html",
-    "app.js": [
-      "js/index.js"
-    ]
-  }),
-
+  // build: new DefaultBuilder({
+  //   "index.html": "index.html",
+  //   "app.js": [
+  //     "js/index.js"
+  //   ]
+  // }),
   // Set default mocha options here, use special reporters etc.
   mocha: {
+    reporter: "eth-gas-reporter",
+    reporterOptions: {
+      currency: "USD",
+      gasPrice: 2,
+    },
     timeout: 100000,
     color: true
   },
@@ -78,11 +114,17 @@ module.exports = {
       settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
           enabled: true,
-          runs: 200
+          runs: 200        // Optimize for how many times you intend to run the code
         },
         evmVersion: "byzantium"
       }
     }
+  },
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+  api_keys: {
+    etherscan: 'ETHERSCAN_API_KEY_FOR_VERIFICATION'
   },
 
   // Truffle DB is currently disabled by default; to enable it, change enabled: false to enabled: true
