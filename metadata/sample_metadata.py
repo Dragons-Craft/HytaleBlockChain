@@ -2,5 +2,8 @@ metadata_template = {
     "name": "",
     "description": "",
     "image": "",
-    "attributes": [{"trait_type": "cuteness", "value": 100}],
+    "attributes": [{
+        "trait_type": "link", "value": "",
+        "trait_type": "WOW Factor", "value": 100
+    }],
 }
