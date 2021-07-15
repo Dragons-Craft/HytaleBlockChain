@@ -6,6 +6,7 @@ by [chrisbarnes2000](https://github.com/chrisbarnes2000) & [reikamoon :ribbon:](
 [Read More...](https://hytale.com/)
 
 ## :memo: Project Description
+### [Project Demonstration Slides](https://docs.google.com/presentation/d/1CgrEjnAIdKIVoB9BebgOtCa3tw6Crx_ekLeKChjURUE)
 Hytale Block-Chain ERC-721 (NFT)
 Hytale Block-Chain is a NFT Platform for Creating, Displaying, & Selling/Trading Hytale Postcards & Fan Art.<br>
 We would like to take the photos from https://hytale.com/media or their Twitter feed and convert them into an NFT.
