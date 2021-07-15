@@ -76,9 +76,9 @@ def get_contract(contract_name):
     return contract
 
 
-def get_breed(breed_number):
-    switch = {0: "PUG", 1: "SHIBA_INU", 2: "ST_BERNARD"}
-    return switch[breed_number]
+def get_category(category_number):
+    switch = {0: "DESKTOP_WALLPAPER", 1: "MOBILE_WALLPAPER", 2: "POST_CARD"}
+    return switch[category_number]
 
 
 def fund_with_link(

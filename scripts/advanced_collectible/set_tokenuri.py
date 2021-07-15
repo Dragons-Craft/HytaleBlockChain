@@ -1,13 +1,17 @@
 #!/usr/bin/python3
 from brownie import SimpleCollectible, AdvancedCollectible, accounts, network, config
 from metadata import sample_metadata
-from scripts.helpful_scripts import get_breed, OPENSEA_FORMAT
+from scripts.helpful_scripts import get_category, OPENSEA_FORMAT
 
 
 dog_metadata_dic = {
-    "PUG": "https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json",
-    "SHIBA_INU": "https://ipfs.io/ipfs/QmdryoExpgEQQQgJPoruwGJyZmz6SqV4FRTX1i73CT3iXn?filename=1-SHIBA_INU.json",
-    "ST_BERNARD": "https://ipfs.io/ipfs/QmbBnUjyHHN7Ytq9xDsYF9sucZdDJLRkWz7vnZfrjMXMxs?filename=2-ST_BERNARD.json",
+    "DESKTOP_WALLPAPER": "https://ipfs.io/ipfs/QmfKQspBeDCcodLT6YUXtx9gVh7iF9K5q4VkZyMAXQzqFq?filename=Blue-Trork.json",
+    "MOBILE_WALLPAPER": "https://ipfs.io/ipfs/QmXi7yWPU321ViWPpu8nXCA8EZJBNNDcaCzsDS2WobacRz?filename=Gaia.json",
+    "POST_CARD": "https://ipfs.io/ipfs/QmavmFNvphub1T3xLTsAxYxnbVwzb7QUBpduhXTpMg5AGx?filename=Iconography-Research.json"
+    
+    # "PUG": "https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json",
+    # "SHIBA_INU": "https://ipfs.io/ipfs/QmdryoExpgEQQQgJPoruwGJyZmz6SqV4FRTX1i73CT3iXn?filename=1-SHIBA_INU.json",
+    # "ST_BERNARD": "https://ipfs.io/ipfs/QmbBnUjyHHN7Ytq9xDsYF9sucZdDJLRkWz7vnZfrjMXMxs?filename=2-ST_BERNARD.json",
 }
 
 def main():
@@ -19,11 +23,11 @@ def main():
         + str(number_of_advanced_collectibles)
     )
     for token_id in range(number_of_advanced_collectibles):
-        breed = get_breed(advanced_collectible.tokenIdToBreed(token_id))
+        category = get_category(advanced_collectible.tokenIdToCategory(token_id))
         if not advanced_collectible.tokenURI(token_id).startswith("https://"):
             print("Setting tokenURI of {}".format(token_id))
             set_tokenURI(token_id, advanced_collectible,
-                         dog_metadata_dic[breed])
+                         dog_metadata_dic[category])
         else:
             print("Skipping {}, we already set that tokenURI!".format(token_id))
 

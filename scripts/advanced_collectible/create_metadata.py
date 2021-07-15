@@ -4,16 +4,20 @@ import requests
 import json
 from brownie import AdvancedCollectible, network
 from metadata import sample_metadata
-from scripts.helpful_scripts import get_breed
+from scripts.helpful_scripts import get_category
 from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
 
-breed_to_image_uri = {
-    "PUG": "https://ipfs.io/ipfs/QmSsYRx3LpDAb1GZQm7zZ1AuHZjfbPkD6J7s9r41xu1mf8?filename=pug.png",
-    "SHIBA_INU": "https://ipfs.io/ipfs/QmYx6GsYAKnNzZ9A6NvEKV9nf1VaDzJrqDR23Y8YSkebLU?filename=shiba-inu.png",
-    "ST_BERNARD": "https://ipfs.io/ipfs/QmUPjADFGEKmfohdTaNcWhp7VGk26h5jXDA7v3VtTnTLcW?filename=st-bernard.png",
+category_to_image_uri = {
+    "DESKTOP_WALLPAPER": "https://ipfs.io/ipfs/Qme4b1YhRhRgMmLLZMmQWhRJG5G3gMZ3pNtcLibMmBWjyf?filename=Blue-Trork.jpeg",
+    "MOBILE_WALLPAPER": "https://ipfs.io/ipfs/QmQWtSSB783uQ3RhA1ZqmSQdTPkP6M4zcNek7ULSWVPwHj?filename=Gaia.jpeg",
+    "POST_CARD": "https://ipfs.io/ipfs/QmewyBCZidLo3zQcu8bpj1xNHt7u8fy5xuxTDdnGzYs54F?filename=Iconography-Research.jpeg"
+    
+    # "PUG": "https://ipfs.io/ipfs/QmSsYRx3LpDAb1GZQm7zZ1AuHZjfbPkD6J7s9r41xu1mf8?filename=pug.png",
+    # "SHIBA_INU": "https://ipfs.io/ipfs/QmYx6GsYAKnNzZ9A6NvEKV9nf1VaDzJrqDR23Y8YSkebLU?filename=shiba-inu.png",
+    # "ST_BERNARD": "https://ipfs.io/ipfs/QmUPjADFGEKmfohdTaNcWhp7VGk26h5jXDA7v3VtTnTLcW?filename=st-bernard.png",
 }
 
 
@@ -31,12 +35,12 @@ def main():
 def write_metadata(token_ids, nft_contract):
     for token_id in range(token_ids):
         collectible_metadata = sample_metadata.metadata_template
-        breed = get_breed(nft_contract.tokenIdToBreed(token_id))
+        category = get_category(nft_contract.tokenIdToCategory(token_id))
         metadata_file_name = (
             "./metadata/{}/".format(network.show_active())
             + str(token_id)
             + "-"
-            + breed
+            + category
             + ".json"
         )
         if Path(metadata_file_name).exists():
@@ -46,8 +50,8 @@ def write_metadata(token_ids, nft_contract):
             )
         else:
             print("Creating Metadata file: " + metadata_file_name)
-            collectible_metadata["name"] = get_breed(
-                nft_contract.tokenIdToBreed(token_id)
+            collectible_metadata["name"] = get_category(
+                nft_contract.tokenIdToCategory(token_id)
             )
             collectible_metadata["description"] = "An adorable {} pup!".format(
                 collectible_metadata["name"]
@@ -55,10 +59,10 @@ def write_metadata(token_ids, nft_contract):
             image_to_upload = None
             if os.getenv("UPLOAD_IPFS") == "true":
                 image_path = "./img/{}.png".format(
-                    breed.lower().replace('_', '-'))
+                    category.lower().replace('_', '-'))
                 image_to_upload = upload_to_ipfs(image_path)
             image_to_upload = (
-                breed_to_image_uri[breed] if not image_to_upload else image_to_upload
+                category_to_image_uri[category] if not image_to_upload else image_to_upload
             )
             collectible_metadata["image"] = image_to_upload
             with open(metadata_file_name, "w") as file:
@@ -66,7 +70,7 @@ def write_metadata(token_ids, nft_contract):
             if os.getenv("UPLOAD_IPFS") == "true":
                 upload_to_ipfs(metadata_file_name)
 
-# curl -X POST -F file=@metadata/rinkeby/0-SHIBA_INU.json http://localhost:5001/api/v0/add
+# curl -X POST -F file=@metadata/rinkeby/0-POST_CARD.json http://localhost:5001/api/v0/add
 
 
 def upload_to_ipfs(filepath):

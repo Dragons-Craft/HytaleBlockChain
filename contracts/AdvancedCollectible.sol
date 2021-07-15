@@ -5,11 +5,11 @@ import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
 contract AdvancedCollectible is ERC721, VRFConsumerBase {
     uint256 public tokenCounter;
-    enum Breed{PUG, SHIBA_INU, ST_BERNARD}
+    enum Category{DESKTOP_WALLPAPER, MOBILE_WALLPAPER, POST_CARD}
     // add other things
     mapping(bytes32 => address) public requestIdToSender;
     mapping(bytes32 => string) public requestIdToTokenURI;
-    mapping(uint256 => Breed) public tokenIdToBreed;
+    mapping(uint256 => Category) public tokenIdToCategory;
     mapping(bytes32 => uint256) public requestIdToTokenId;
     event requestedCollectible(bytes32 indexed requestId); 
 
@@ -20,7 +20,7 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
     constructor(address _VRFCoordinator, address _LinkToken, bytes32 _keyhash)
     public 
     VRFConsumerBase(_VRFCoordinator, _LinkToken)
-    ERC721("Dogie", "DOG")
+    ERC721("HytaleBlockChain", "POST-CARDS")
     {
         tokenCounter = 0;
         keyHash = _keyhash;
@@ -41,8 +41,8 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         uint256 newItemId = tokenCounter;
         _safeMint(dogOwner, newItemId);
         _setTokenURI(newItemId, tokenURI);
-        Breed breed = Breed(randomNumber % 3); 
-        tokenIdToBreed[newItemId] = breed;
+        Category category = Category(randomNumber % 3); 
+        tokenIdToCategory[newItemId] = category;
         requestIdToTokenId[requestId] = newItemId;
         tokenCounter = tokenCounter + 1;
     }

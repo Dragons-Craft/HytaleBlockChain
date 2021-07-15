@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from brownie import SimpleCollectible, AdvancedCollectible, accounts, network, config
 from metadata import sample_metadata
-from scripts.helpful_scripts import get_breed
+from scripts.helpful_scripts import get_category
 
 
 def main():
