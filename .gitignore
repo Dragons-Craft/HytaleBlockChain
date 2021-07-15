@@ -1,3 +1,5 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 *.swp
 *.swo
 
@@ -22,14 +24,20 @@ coverageEnv
 
 # Dependency directory
 node_modules
+.pnp
+.pnp.js
 
 # Debug log from npm
 npm-debug.log
 
 # local env variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# truffle build directory
+# truffle build directory & production
 build/
 
 # macOS
@@ -58,6 +66,10 @@ allFiredEvents
 cache
 artifacts
 
+# misc
+.DS_Store
 .vscode/
-.env
-.mnemonic
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
