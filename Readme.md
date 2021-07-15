@@ -41,3 +41,7 @@ We would like to take the photos from https://hytale.com/media or their Twitter 
 <li>https://app.ens.domains/</li>
 <li>https://badge.design/</li>
 <li>https://infura.io/</li>
+---
+<li>https://github.com/dappuniversity/marketplace</li>
+<li>https://www.youtube.com/watch?v=VH9Q2lf2mNo</li>
+<li>https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbUFab0hCblBhTlNyR21nT3lIeXQ1YzBwYkFKUXxBQ3Jtc0tsMkRubEJLRlVaVFQzV09za2lUbGFBTktWU2ZBb044THM2d0VfM0ZaZzEtSjVrYmh5LUlOX2xTYUJIYnl5Q3hZNzJCTlVRVHZrX3JwWkVEZ05TVThyd2YyVTdyYUg5YmJ2SE44aWFZb3NIdHJESXpDaw&q=http%3A%2F%2Fwww.dappuniversity.com%2Farticles%2Fhow-to-build-a-blockchain-app</li>
