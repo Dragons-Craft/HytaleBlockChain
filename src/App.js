@@ -6,10 +6,9 @@ import Web3 from 'web3';
 
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
-// import About from "./components/About/About";
-// import Listings from "./components/Listings/Listings";
+import About from "./components/About/About";
+import Listings from "./components/Listings/Listings";
 // import Contracts from "./components/Contracts/Contracts";
-import Main from './Main'
 
 class App extends Component {
   async componentWillMount() {
@@ -38,7 +37,7 @@ class App extends Component {
     const networkId = await web3.eth.net.getId()
     const networkData = Marketplace.networks[networkId]
     if (networkData) {
-      const marketplace = web3.eth.Contract(Marketplace.abi, networkData.address)
+      const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
       this.setState({ marketplace })
 
       // Load products
@@ -92,14 +91,13 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar account={this.state.account} />
-        {/* <About />
-        <Listings /> */}
+        <About />
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex">
               {this.state.loading
                 ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-                : <Main
+                : <Listings
                   products={this.state.products}
                   createProduct={this.createProduct}
                   purchaseProduct={this.purchaseProduct} />
