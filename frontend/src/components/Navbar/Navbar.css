@@ -1,0 +1,43 @@
+/* Navbar */
+.navbar {
+  background-color: #162039;
+  font-family: "Nanum Myeongjo";
+  overflow: hidden;
+  border: 3px solid;
+  border-radius: 40px;
+  border-color: #4e5765;
+  text-align: center;
+  padding: 15px;
+}
+
+.navbar:hover {
+    border-color:rgb(153, 123, 24);
+}
+
+.navbar a:nth-child(2) {
+    font-size: 30px;
+}
+
+.navbar a {
+  color: #4e5765;
+  font-weight: 800;
+  font-size: 24px;
+  text-transform: capitalize;
+  text-decoration: none;
+  padding: 20px;
+  text-shadow: 2px 2px #0a0a0a;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+  font-size: 30px;
+  color: rgb(153, 123, 24);
+}
+
+.navbar a:hover.active {
+  color: rgb(153, 123, 24);
+}
+
+.navbar a.active {
+  color: rgb(153, 123, 24);
+}

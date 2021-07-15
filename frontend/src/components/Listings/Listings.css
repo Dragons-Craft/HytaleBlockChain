@@ -1,0 +1,77 @@
+
+:root {
+    --silver: #4e5765;
+    --gold: rgb(153, 123, 24);
+    --brightgold: rgb(228, 187, 54);
+    --black: rgb(31, 30, 29);
+    --night: rgb(0, 0, 0);
+}
+
+.title {
+    font-family:  "Nanum Myeongjo", sans-serif;
+    color: var(--gold);
+    font-weight: 800;
+    text-decoration: underline;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px black;
+    margin-top: 40px;
+}
+
+.title:hover {
+    color: var(--brightgold);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding: 10px;
+    margin-left: 140px;
+    margin-right: 140px;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+.sample1 {
+    font-family:  "Nanum Myeongjo", sans-serif;
+    border-radius: 25px;
+    background-image: linear-gradient(var(--night), var(--black));
+    color: var(--silver);
+    font-size: 25px;  
+    padding-top: 40px;
+    line-height: 20px;
+}
+
+.sample1:hover {
+    border: 4px solid var(--brightgold);
+    color: var(--gold);
+}
+
+.sample1 img {
+    border: 2px solid var(--silver);
+}
+
+.sample1:hover img {
+    border-color: var(--gold);
+}
+
+.sample1 h3 {
+    font-family: "Spectral SC", sans-serif;
+}
+
+.sample1 h4 {
+    font-family: "Spectral SC", sans-serif;
+}
+
+.sample1 a {
+    color: rgb(0, 150, 209);
+}
+
+.sample1 a:hover {
+    color: rgb(105, 45, 173);
+}
+
+.sample1 .a:visited {
+    color: rgb(9, 86, 131);
+}

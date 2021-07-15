@@ -1,0 +1,40 @@
+
+:root {
+    --silver: #4e5765;
+    --gold: rgb(153, 123, 24);
+    --brightgold: rgb(228, 187, 54);
+}
+
+.title {
+    font-family:  "Nanum Myeongjo", sans-serif;
+    color: var(--gold);
+    font-weight: 800;
+    text-decoration: underline;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px black;
+    margin-top: 40px;
+}
+
+.title:hover {
+    color: var(--brightgold);
+}
+
+.about-container {
+    display: flex;
+    border-radius: 25px;
+    border: 3px solid var(--silver);
+    padding: 20px;
+    font-family: "Nanum Myeongjo", sans-serif;
+    font-size: 30px;
+    background-color: rgb(31, 30, 29);
+    color: var(--silver);
+    margin-top: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.about-container:hover {
+    border-color: var(--brightgold);
+    color: var(--gold);
+}
