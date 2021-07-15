@@ -6,9 +6,10 @@ import Web3 from 'web3';
 
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
-import About from "./components/About/About";
-import Listings from "./components/Listings/Listings";
-import Contracts from "./components/Contracts/Contracts";
+// import About from "./components/About/About";
+// import Listings from "./components/Listings/Listings";
+// import Contracts from "./components/Contracts/Contracts";
+import Main from './Main'
 
 class App extends Component {
   async componentWillMount() {
@@ -36,9 +37,12 @@ class App extends Component {
     this.setState({ account: accounts[0] })
     const networkId = await web3.eth.net.getId()
     const networkData = Marketplace.networks[networkId]
-    if (networkData) {
+    if(networkData) {
       const marketplace = web3.eth.Contract(Marketplace.abi, networkData.address)
-      console.log(marketplace)
+      this.setState({ marketplace })
+      const productCount = await marketplace.methods.productCount().call()
+      console.log(productCount.toString())
+      this.setState({ loading: false})
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
     }
@@ -52,14 +56,33 @@ class App extends Component {
       products: [],
       loading: true
     }
+    this.createProduct = this.createProduct.bind(this)
+  }
+
+  createProduct(name, price) {
+    this.setState({ loading: true })
+    this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account })
+      .once('receipt', (receipt) => {
+        this.setState({ loading: false })
+      })
   }
 
   render() {
     return (
       <div className="App">
         <Navbar account={this.state.account} />
-        <About />
-        <Listings />
+        {/* <About />
+        <Listings /> */}
+        <div className="container-fluid mt-5">
+          <div className="row">
+            <main role="main" className="col-lg-12 d-flex">
+              {this.state.loading
+                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
+                : <Main createProduct={this.createProduct} />
+              }
+            </main>
+          </div>
+        </div>
         <Footer />
       </div>
     );
