@@ -38,8 +38,6 @@ npm-debug.log
 .env.production.local
 
 # truffle build directory & production
-
-# truffle build directory
 build/
 
 # macOS

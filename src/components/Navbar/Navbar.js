@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Component } from 'react';
 import "./Navbar.css";
 
-function Navbar() {
+class Navbar extends Component {
+  render() {
     return (
       <div>
         <div className="navbar">
@@ -10,10 +11,11 @@ function Navbar() {
             HYTALE NFT MARKETPLACE
           </a>
           <a href="#about">ABOUT</a>
+          <small className="text-white"><span id="account">{this.props.account}</span></small>
         </div>
       </div>
     );
-
+  }
 }
 
 export default Navbar
